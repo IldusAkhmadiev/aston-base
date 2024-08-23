@@ -17,7 +17,7 @@ public class PuttingIntoStreamUtil {
     public static void findAndSortTransactionsByValueFor2011(List<Transaction> transactions) {
         transactions.stream()
                 .filter(transaction -> transaction.getYear() == 2011)
-                .sorted((o1, o2) -> Math.min(o1.getValue(),o2.getValue()))
+                .sorted(Comparator.comparingInt(Transaction::getValue))
                 .forEach(System.out::println);
     }
 
