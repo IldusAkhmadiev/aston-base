@@ -10,56 +10,42 @@ public class ExecutorsRunner {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
 //        ExecutorService executorService1 = Executors.newSingleThreadExecutor();
 //        ExecutorService executorService2 = Executors.newCachedThreadPool();
-        ExecutorService executorService3 = Executors.newWorkStealingPool();
+//        ExecutorService executorService3 = Executors.newWorkStealingPool();
 
-        try {
-            executorService.execute(() -> {
-                System.out.println(10 / 0);
-            });
-        } catch (ArithmeticException ex) {
-            System.out.println("Catched");
-        }
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-//
-        Future<Integer> result = executorService.submit(() -> 20);
-//
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//        System.out.println();
-//
-        System.out.println(result.get());
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("1");
+        });
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("2");
+        });
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(6000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("3");
+        });
+        executorService.submit(() -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("4");
+        });
+        System.out.println("In main");
 
-//        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-//        executorService.submit(() -> System.out.println("hello " + Thread.currentThread().getName()));
-
-//        Future<Integer> result = executorService.submit(() -> {
-//            Thread.sleep(5000);
-//            return 22;
-////        });
-//
-//        executorService.execute(() -> System.out.println("Hello"));
-//        executorService.execute(() -> System.out.println("Hello"));
-//        executorService.execute(() -> System.out.println("Hello"));
-
-//        System.out.println(result.get());
-//        System.out.println(result.get());
-//        System.out.println(result.get());
-//        System.out.println(result.get());
-
-//        executorService.submit(() -> Thread.sleep(5));
-
-
-//        System.out.println("Конец");
         executorService.shutdown();
     }
 }

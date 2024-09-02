@@ -36,20 +36,16 @@ public final class Employee implements Comparable<Employee> {
         return Objects.hash(name, age);
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public int compareTo(Employee o) {
-        return this.age - o.age;
-    }
-
     @Override
     public String toString() {
         return "Employee{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        return this.age - o.age;
     }
 }

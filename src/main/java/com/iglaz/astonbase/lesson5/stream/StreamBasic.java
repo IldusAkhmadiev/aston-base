@@ -9,10 +9,10 @@ import java.util.List;
 
 public class StreamBasic {
     public static void main(String... args) {
-        getLowCaloricDishesNamesInJava7(Dish.menu).forEach(System.out::println);
+//        getLowCaloricDishesNamesInJava7(Dish.menu).forEach(System.out::println);
 
         // Java 8
-        // getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
+        getLowCaloricDishesNamesInJava8(Dish.menu).forEach(System.out::println);
     }
 
     public static List<String> getLowCaloricDishesNamesInJava7(List<Dish> dishes) {
@@ -44,14 +44,15 @@ public class StreamBasic {
     }
 
     public static List<String> getLowCaloricDishesNamesInJava8(List<Dish> dishes) {
-        Comparator<Dish> dishComparator = (Dish o1, Dish o2) -> o1.getCalories() - o2.getCalories();
-
-        List<String> list = dishes.stream()
-                .filter(dish -> dish.getCalories() > 400)
-                .sorted(dishComparator)
-                .map(dish -> dish.getName())
-                .toList();
+        dishes.stream()
+                .filter(dish -> dish.getCalories() < 400)
+                .flatMap(d -> d.getIngredients().stream())
+                .forEach(System.out::println);
 
         return Collections.emptyList();
+    }
+
+    static public boolean some(Dish dish) {
+        return true;
     }
 }
